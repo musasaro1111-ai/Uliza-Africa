@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#155eef">
+  <meta name="description" content="Uliza Africa — ask questions anonymously, share knowledge, and learn together.">
+  <title>Uliza Africa — Ask freely. Learn together.</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Uliza Africa home">
+      <span class="brand-mark">U</span><span>Uliza <b>Africa</b></span>
+    </a>
+    <button id="auth-open" class="button button-outline">Log in / Sign up</button>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow"><span class="live-dot"></span> A community for curious minds</div>
+      <h1>Ask freely.<br><span>Learn together.</span></h1>
+      <p>Ask questions without showing your name. Share what you know. Learn from people across Africa.</p>
+      <div class="hero-actions">
+        <button id="ask-hero" class="button button-primary">Ask a question <span aria-hidden="true">↗</span></button>
+        <a href="#questions" class="button button-soft">Explore questions</a>
+      </div>
+      <div class="trust-line"><span>◉</span> Your public questions don't display your account name.</div>
+    </section>
+
+    <section class="ask-panel panel" id="ask-panel">
+      <div class="section-heading">
+        <div><p class="eyebrow blue">YOUR VOICE MATTERS</p><h2>What do you want to ask?</h2></div>
+        <span class="question-icon">?</span>
+      </div>
+      <p class="muted">Keep it respectful. Don't include passwords, phone numbers, or private identifying details.</p>
+      <form id="question-form">
+        <label for="question-title">Question title</label>
+        <input id="question-title" maxlength="140" required placeholder="What would you like to know?">
+        <label for="question-body">Add context <span class="optional">(optional)</span></label>
+        <textarea id="question-body" maxlength="3000" rows="3" placeholder="Give people enough context to answer…"></textarea>
+        <div class="form-bottom"><span class="muted small">Posted anonymously</span><button class="button button-primary" type="submit">Submit question</button></div>
+      </form>
+      <div id="question-message" class="message" role="status"></div>
+    </section>
+
+    <section id="questions" class="questions-section">
+      <div class="section-heading questions-heading">
+        <div><p class="eyebrow blue">COMMUNITY KNOWLEDGE</p><h2>Explore questions</h2></div>
+        <span id="question-count" class="count-pill">Loading…</span>
+      </div>
+      <div class="search-row">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="Search questions…" aria-label="Search questions">
+        <button id="search-clear" class="clear-search" type="button">Clear</button>
+      </div>
+      <div id="feed-message" class="message" role="status"></div>
+      <div id="question-list" class="question-list">
+        <div class="skeleton"></div><div class="skeleton"></div>
+      </div>
+      <button id="load-more" class="button button-outline load-more" hidden>Load more</button>
+    </section>
+
+    <section id="admin-panel" class="panel admin-panel" hidden>
+      <div class="section-heading"><div><p class="eyebrow blue">REVIEW QUEUE</p><h2>Admin moderation</h2></div><span class="admin-tag">ADMIN</span></div>
+      <p class="muted">Approve appropriate content or reject content that breaks the community rules.</p>
+      <div id="admin-queue"></div>
+    </section>
+
+    <footer>
+      <div class="footer-brand"><span class="brand-mark small-mark">U</span> Uliza Africa</div>
+      <p>Ask respectfully. Answer honestly. Protect each other's privacy.</p>
+      <div class="footer-links"><a href="#community-guidelines">Community guidelines</a><a href="mailto:hello@uliza.africa">Contact</a></div>
+      <div id="community-guidelines" class="guidelines"><b>Community guidelines</b><br>No harassment, hate, threats, illegal content, spam, or sharing another person's private information. Questions and answers may be reviewed by moderators. Do not use this platform for emergencies.</div>
+      <p class="copyright">© <span id="year"></span> Uliza Africa</p>
+    </footer>
+  </main>
+
+  <div id="auth-modal" class="modal" hidden>
+    <div class="modal-backdrop" data-close-auth></div>
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+      <button class="modal-close" data-close-auth aria-label="Close">×</button>
+      <div class="brand modal-brand"><span class="brand-mark">U</span><span>Uliza <b>Africa</b></span></div>
+      <h2 id="auth-title">Join the conversation</h2>
+      <p class="muted">Create an account to ask or answer. Your public posts stay anonymous.</p>
+      <div class="auth-tabs">
+        <button id="tab-login" class="auth-tab active" type="button">Log in</button>
+        <button id="tab-signup" class="auth-tab" type="button">Create account</button>
+      </div>
+      <form id="auth-form">
+        <label for="auth-email">Email address</label>
+        <input id="auth-email" type="email" autocomplete="email" required placeholder="you@example.com">
+        <label for="auth-password">Password</label>
+        <input id="auth-password" type="password" autocomplete="current-password" minlength="8" required placeholder="At least 8 characters">
+        <button id="auth-submit" class="button button-primary full-width" type="submit">Log in</button>
+      </form>
+      <div id="auth-message" class="message" role="status"></div>
+      <p class="small muted">Never share your password with anyone. Use an email you can access to verify your account.</p>
+    </section>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
